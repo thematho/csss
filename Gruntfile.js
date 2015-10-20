@@ -18,8 +18,10 @@ module.exports = function(grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
+    plugins: '<%= yeoman.app %>/plugins',
     dist: 'dist',
     views: '<%= yeoman.app %>/scripts/**/*.html',
+    images: '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
     unitTest: 'app/scripts/**/!(*.spec).js'
   };
 
@@ -64,7 +66,8 @@ module.exports = function(grunt) {
         files: [
           appConfig.views,
           '.tmp/styles/{,*/}*.css',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          appConfig.app + '/images/*',
+          appConfig.images
         ]
       }
     },
@@ -87,7 +90,9 @@ module.exports = function(grunt) {
                 '/bower_components',
                 connect.static('./bower_components')
               ),
-              connect.static(appConfig.app)
+              connect.static(appConfig.app),
+              connect.static(appConfig.plugins),
+              connect.static(appConfig.app + '/images')
             ];
           }
         }
@@ -192,7 +197,7 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'dist/app.css': 'src/app.css'
+          'dist/main.css': 'app/styles/main.css'
         }
       }
     },
@@ -274,17 +279,6 @@ module.exports = function(grunt) {
     //   dist: {}
     // },
 
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
-    },
-
     svgmin: {
       dist: {
         files: [{
@@ -345,6 +339,7 @@ module.exports = function(grunt) {
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
+            appConfig.plugins,
             '*.html',
             appConfig.views,
             'images/{,*/}*.{webp}',
@@ -373,14 +368,16 @@ module.exports = function(grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'copy:styles'
+        'copy:styles',
+        'html2js'
       ],
       test: [
-        'copy:styles'
+        'copy:styles',
+        'html2js'
       ],
       dist: [
         'copy:styles',
-        'imagemin',
+        'html2js',
         'svgmin'
       ]
     },
@@ -389,7 +386,10 @@ module.exports = function(grunt) {
     karma: {
       unit: {
         configFile: 'test/karma.conf.js',
-        singleRun: true
+        singleRun: true,
+        preprocessors: {
+          'app/scripts/**/*.tpl.html': ['ng-html2js']
+        }
       }
     }
   });

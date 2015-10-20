@@ -14,40 +14,31 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="angularCsssApp">
+  <body ng-app="angularCsssApp" ng-controller="AppCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
-          <li><a ng-href="#">About</a></li>
-          <li><a ng-href="#">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">angularCsss</h3>
-      </div>
+    <header id="intro" class="slide">
+      <h1>Sample CSSS presentation</h1>
+      <p class="attribution">By Lea Verou</p>
+    </header>
 
-      <div ng-include="'views/main.html'" ng-controller="MainCtrl"></div>
+    <section>
+      <header class="slide">
+        <h1>Section title</h1>
+      </header>
 
-      <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
-    </div>
+      <section class="slide">
+        <h2>Slide title</h2>
+        <p>Slide content</p>
+      </section>
+    </section>
 
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
+    <footer class="slide">
+      <h2>Thank you!</h2>
+      <p>Closing remarks</p>
+    </footer>
 
     <!-- build:js(.) scripts/oldieshim.js -->
     <!--[if lt IE 9]>
@@ -58,11 +49,24 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
+    <script src="scripts/slideshow.js"></script>
+    <script src="plugins/css-edit.js"></script>
+    <script src="plugins/css-snippets.js"></script>
+    <script src="plugins/css-controls.js"></script>
+    <script src="plugins/code-highlight.js"></script>
+
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="templates/templates.js"></script>
         <script src="scripts/app.js"></script>
+                <script src="scripts/app-controller.js"></script>
+
         <script src="scripts/controllers/main.js"></script>
         <!-- endbuild -->
 </body>
