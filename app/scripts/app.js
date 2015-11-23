@@ -13,5 +13,12 @@ angular
     'ngAnimate',
     'ngResource',
     'ui.router',
+    'hljs',
     'templates'
-  ]);
+  ])
+  .config(function(hljsServiceProvider) {
+    hljsServiceProvider.setOptions({
+      // replace tab with 2 spaces
+      tabReplace: '  '
+    });
+  });

@@ -1,7 +1,10 @@
 {
   "name": "angularcsss",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "angular-highlightjs": "^0.5.1",
+    "highlight.js": "^8.9.1"
+  },
   "devDependencies": {
     "bower": "^1.5.3",
     "chai": "^3.3.0",
